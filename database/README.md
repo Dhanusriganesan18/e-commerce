@@ -1,30 +1,42 @@
 # Database Setup
 
-This project is currently a frontend-only shop, so the database is prepared as a starter backend schema.
+This project now supports a MySQL backend.
 
 Files:
-- `database/schema.sql`: creates the core tables
-- `database/seed.sql`: inserts the current product catalog
+- `database/mysql-schema.sql`: creates the MySQL tables
+- `database/mysql-seed.sql`: inserts the current product catalog
+- `database/schema.sql`: older SQLite schema
+- `database/seed.sql`: older SQLite seed
 
-Tables included:
+MySQL tables included:
 - `products`
 - `customers`
 - `orders`
 - `order_items`
 - `payments`
 
-Suggested flow:
-1. Create a SQLite database, for example `store.db`
-2. Run `schema.sql`
-3. Run `seed.sql`
-4. Build an API layer later to connect the frontend cart and checkout form to these tables
+How to connect MySQL:
+1. Create a MySQL server or use an existing one.
+2. Copy `.env.example` to `.env`.
+3. Fill in your MySQL credentials in `.env`.
+4. Run `npm install`.
+5. Run `npm start`.
 
-SQLite example:
+Example `.env`:
 
-```sql
-.read database/schema.sql
-.read database/seed.sql
+```env
+PORT=3000
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=techstore
 ```
+
+What happens on startup:
+- the app creates the database if it does not exist
+- it runs `mysql-schema.sql`
+- it seeds products from `mysql-seed.sql` if the `products` table is empty
 
 What this schema supports:
 - product catalog storage
@@ -32,10 +44,3 @@ What this schema supports:
 - order summary and total storage
 - order line items with quantity
 - COD and UPI/bank payment records
-
-Next backend endpoints you will likely want:
-- `GET /products`
-- `POST /customers`
-- `POST /orders`
-- `POST /payments`
-- `GET /orders/:id`
