@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<!-- Configurações do documento -->
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -12,48 +10,164 @@
 </head>
 
 <body>
-    <!-- CABEÇALHO DA PÁGINA -->
     <header>
-        <!-- Logo e nome da loja -->
         <div class="logo">
             <i class="fa-solid fa-bolt"></i>
             <h1>TechStore</h1>
         </div>
-        <!-- Barra de pesquisa -->
+
         <div class="search-container">
-            <input type="text" placeholder="Pesquisar produtos..." class="search-input">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search products..." class="search-input">
+            <span class="search-icon" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
         </div>
+
+        <button class="cart-trigger" type="button" aria-label="Open cart">
+            <span class="cart-trigger-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </span>
+            <span>Cart</span>
+            <span class="cart-count">0</span>
+        </button>
     </header>
 
-    <!-- MENU DE NAVEGAÇÃO / CATEGORIAS -->
     <div class="categories-container">
         <nav class="categories-bar">
-            <button class="category-btn active" data-category="all">Todos</button>
+            <button class="category-btn active" data-category="all">All</button>
             <button class="category-btn" data-category="smartphones">Smartphones</button>
             <button class="category-btn" data-category="laptops">Laptops</button>
-            <button class="category-btn" data-category="headphones">Fones</button>
-            <button class="category-btn" data-category="accessories">Acessórios</button>
+            <button class="category-btn" data-category="headphones">Headphones</button>
+            <button class="category-btn" data-category="accessories">Accessories</button>
             <button class="category-btn" data-category="smartwatches">Smartwatches</button>
         </nav>
     </div>
 
-    <!-- HERO -->
     <section class="hero-section">
-        <h2>Black Friday Antecipada!</h2>
-        <p>Encontre os melhores produtos de tecnologia com descontos imperdíveis.</p>
+        <h2>Early Black Friday!</h2>
+        <p>Find the best tech products with unbeatable discounts.</p>
     </section>
-    <!-- Como produtos em destaque, carrossel de banners, etc. -->
-    <main class="products">
-        <div class="products-container">
 
+    <main class="products">
+        <div class="products-container"></div>
+    </main>
+
+    <div class="cart-overlay hidden"></div>
+
+    <aside class="cart-panel hidden" aria-label="Shopping cart">
+        <div class="cart-panel-header">
+            <div>
+                <h2>Your Cart</h2>
+                <p>Review items, choose payment, and place your order.</p>
+            </div>
+            <button class="cart-close" type="button" aria-label="Close cart">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
 
-    </main>
-    <!-- RODAPÉ DA PÁGINA -->
+        <div class="cart-view cart-summary-view">
+            <div class="cart-items"></div>
+
+            <div class="cart-empty hidden">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <p>Your cart is empty.</p>
+                <span>Add products to see your summary here.</span>
+            </div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Items</span>
+                    <span class="summary-items-count">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span class="summary-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="summary-shipping">$25.00</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <span class="summary-total">$0.00</span>
+                </div>
+                <button class="checkout-btn" type="button">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <div class="cart-view checkout-view hidden">
+            <form class="checkout-form">
+                <div class="form-grid">
+                    <label>
+                        Full Name
+                        <input type="text" name="customerName" placeholder="Enter your name" required>
+                    </label>
+                    <label>
+                        Mobile Number
+                        <input type="tel" name="mobileNumber" placeholder="Enter your mobile number" required>
+                    </label>
+                </div>
+
+                <label>
+                    Delivery Address
+                    <textarea name="address" rows="3" placeholder="Enter delivery address" required></textarea>
+                </label>
+
+                <div class="payment-options">
+                    <p class="payment-title">Payment Method</p>
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="cod" checked>
+                        <span>Cash on Delivery</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="upi">
+                        <span>UPI / Bank Transfer</span>
+                    </label>
+                </div>
+
+                <div class="bank-details hidden">
+                    <div class="form-grid">
+                        <label>
+                            Bank Name
+                            <input type="text" name="bankName" placeholder="Enter bank name">
+                        </label>
+                        <label>
+                            UPI ID
+                            <input type="text" name="upiId" placeholder="name@bank">
+                        </label>
+                    </div>
+                    <div class="form-grid">
+                        <label>
+                            Account Holder
+                            <input type="text" name="accountHolder" placeholder="Enter account holder name">
+                        </label>
+                        <label>
+                            Last 4 Digits
+                            <input type="text" name="accountLast4" placeholder="1234" maxlength="4">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="checkout-actions">
+                    <button class="back-to-cart-btn" type="button">Back to Cart</button>
+                    <button class="place-order-btn" type="submit">Place Order</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="cart-view success-view hidden">
+            <div class="success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Your product has been ordered successfully</h3>
+            <p class="success-message"></p>
+            <button class="continue-shopping-btn" type="button">Continue Shopping</button>
+        </div>
+    </aside>
+
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 TechStore. Todos os direitos reservados.</p>
+            <p>&copy; 2025 TechStore. All rights reserved.</p>
             <div class="footer-social">
                 <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
@@ -63,10 +177,6 @@
     </footer>
 </body>
 
-<script src="scripts.js">
-
-
-</script>
-
+<script src="scripts.js"></script>
 
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "techstore-ecommerce",
+  "version": "1.0.0",
+  "description": "TechStore e-commerce app with Node, Express, and MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.14.1"
+  }
+}
