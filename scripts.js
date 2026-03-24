@@ -440,6 +440,15 @@ function getProductById(id) {
     return produtos.find(produto => produto.id === id);
 }
 
+function normalizeProduct(produto) {
+    return {
+        ...produto,
+        preco: Number(produto.preco),
+        precoOriginal: produto.precoOriginal == null ? null : Number(produto.precoOriginal),
+        desconto: produto.desconto == null ? null : Number(produto.desconto)
+    };
+}
+
 async function carregarProdutos() {
     try {
         const response = await fetch("/api/products");
@@ -447,10 +456,11 @@ async function carregarProdutos() {
             throw new Error("Failed to load products");
         }
 
-        produtos = await response.json();
+        const data = await response.json();
+        produtos = data.map(normalizeProduct);
     } catch (error) {
         console.error("Falling back to local product data:", error);
-        produtos = fallbackProducts;
+        produtos = fallbackProducts.map(normalizeProduct);
     }
 }
 
